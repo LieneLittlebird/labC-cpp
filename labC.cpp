@@ -19,7 +19,7 @@ int getIntInput()
             cin.clear();
             cin.ignore(256, '\n');
         }
-        else if (inputNumber < 0)
+        else if (inputNumber <= 0)
         {
             cout << "Please, enter a positive non-zero integer\n";
         }
@@ -36,62 +36,42 @@ int getIntInput()
     return inputNumber;
 }
 
-// int main()
-// {
-//     int num;
-//     int i;
-//     int count = 0;
-
-//     cin >> num;
-//     for (i = 1; i <= num; i++)
-//     {
-//         if (num % i == 0)
-//             count++;
-//     }
-
-//     if (count > 2)
-//         cout << num << " is a composite number";
-//     else
-//         cout << num << " is not a composite number";
-
-//     return 0;
-// }
-
-/* 
-1. A loop that finds the composite numbers
-2. A loop that finds the smallest composit number
-*/
-
 int smallestCompositeNumber()
 {
 
     int count = 0;
-    int num;
-    int n;
-    int compNum;
-    // Is compNum an array?
+    int inputNumber;
+    int noRemainder;
+    // int compNum;
     int minCompNum;
     cout << "Enter the number of elements: \n";
     cin >> count;
     cout << "Enter " << count << " numbers: \n";
 
-    for (int i = 1; i < count; i++)
+    for (int i = 0; i < count; ++i)
     {
-        cin >> num;
+        cin >> inputNumber;
 
-        if (num % i == 0)
+        if (inputNumber % i == 0)
         {
-            compNum++;
+            noRemainder++;
         }
 
-        if (compNum > 2)
+        if (noRemainder > 2)
         {
-            // do something
+            if (inputNumber < minCompNum)
+            {
+                minCompNum = inputNumber;
+            }
+            else if (minCompNum == inputNumber)
+            {
+                //smth happens
+            }
         }
     }
 
-    cout << "The composite numbers are " << compNum;
-    // Are they (?)
+    cout << "The smallest composite number is " << minCompNum;
+    ;
 
     return 0;
 }
