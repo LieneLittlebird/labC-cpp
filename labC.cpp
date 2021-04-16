@@ -42,7 +42,7 @@ int smallestCompositeNumber()
     int count = 0;
     int inputNumber;
     int noRemainder;
-    // int compNum;
+    int compNum;
     int minCompNum;
     cout << "Enter the number of elements: \n";
     cin >> count;
@@ -59,14 +59,16 @@ int smallestCompositeNumber()
 
         if (noRemainder > 2)
         {
-            if (inputNumber < minCompNum)
-            {
-                minCompNum = inputNumber;
-            }
-            else if (minCompNum == inputNumber)
-            {
-                //smth happens
-            }
+            compNum++; //smth else here
+        }
+        if (inputNumber < minCompNum)
+        {
+            minCompNum = inputNumber;
+        }
+        else if (minCompNum == inputNumber)
+        {
+            //smth happens
+            compNum++;
         }
     }
 
