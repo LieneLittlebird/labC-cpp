@@ -6,6 +6,7 @@ Program created at: 2021/16.04 */
 #include <iostream>
 using namespace std;
 
+// A validation function that checks, if the input is an integer
 int getIntInput()
 {
     int inputNumber;
@@ -13,19 +14,12 @@ int getIntInput()
     while (continueLoop)
     {
         cin >> inputNumber;
+
         if (cin.fail())
         {
             cout << "Invalid input. Please, enter an integer\n";
             cin.clear();
             cin.ignore(256, '\n');
-        }
-        else if (inputNumber < 0)
-        {
-            cout << "Please, enter a positive non-zero integer\n";
-        }
-        else if (inputNumber > 100)
-        {
-            cout << "Please, enter a positive integer between 1 and 100 \n";
         }
         else
         {
@@ -36,64 +30,85 @@ int getIntInput()
     return inputNumber;
 }
 
-// int main()
-// {
-//     int num;
-//     int i;
-//     int count = 0;
-
-//     cin >> num;
-//     for (i = 1; i <= num; i++)
-//     {
-//         if (num % i == 0)
-//             count++;
-//     }
-
-//     if (count > 2)
-//         cout << num << " is a composite number";
-//     else
-//         cout << num << " is not a composite number";
-
-//     return 0;
-// }
-
-/* 
-1. A loop that finds the composite numbers
-2. A loop that finds the smallest composit number
-*/
-
-int smallestCompositeNumber()
+/*A  function that checks, if the input is a prime numer.
+If it is, it can't be a composite number. If the input is not a prime number, it is a composite number*/
+bool isPrime(int n)
 {
-
-    int count = 0;
-    int num;
-    int n;
-    int compNum;
-    // Is compNum an array?
-    int minCompNum;
-    cout << "Enter the number of elements: \n";
-    cin >> count;
-    cout << "Enter " << count << " numbers: \n";
-
-    for (int i = 1; i < count; i++)
+    int i, m = 0;
+    m = n / 2;
+    for (i = 2; i <= m; i++)
     {
-        cin >> num;
-
-        if (num % i == 0)
+        if (n % i == 0)
         {
-            compNum++;
-        }
-
-        if (compNum > 2)
-        {
-            // do something
+            return false;
         }
     }
 
-    cout << "The composite numbers are " << compNum;
-    // Are they (?)
+    return true;
+}
 
-    return 0;
+/* A function finds the smallesr composite number */
+void findSmallestCompositeNumber()
+{
+    int numberOfElements;
+    bool continueLoop = true;
+
+    /* The user enters the number of elements she/he wants to check for the smallest composite number. 
+    The input needs to be an integer between 1 and 100*/
+    while (continueLoop)
+    {
+        cout << "Please, enter the number of elements to test (positive integer between 1 and 100) \n";
+        numberOfElements = getIntInput();
+
+        if (numberOfElements > 0 && numberOfElements < 100)
+        {
+            continueLoop = false;
+        }
+    }
+
+    int minimumCompositeNumber = 0;
+    int currentNumber;
+    /* The program loops through all of the input numbers.
+    The inputs are validated.
+    If the inputs are not between 1 and 100, an error message appears.
+     */
+    for (int i = 0; i < numberOfElements; i++)
+    {
+        bool continueCheck = true;
+        while (continueCheck)
+        {
+            cout << "\nPlease, enter a number to test\n";
+            currentNumber = getIntInput();
+
+            if (currentNumber > 0 && currentNumber < 100)
+            {
+                continueCheck = false;
+            }
+            else
+            {
+                cout << "Please, enter a positive integer between 1 and 100 \n";
+            }
+        }
+
+        // If the number is not prime, the program checks for the smallest composite number.
+        if (!isPrime(currentNumber))
+        {
+            if (minimumCompositeNumber == 0 || currentNumber < minimumCompositeNumber)
+            {
+                minimumCompositeNumber = currentNumber;
+            }
+        }
+    }
+
+    // If the smallest composite number found is not 0, the result is printed on the console.
+    if (minimumCompositeNumber != 0)
+    {
+        cout << "\nThe smallest composite number is " << minimumCompositeNumber << endl;
+    }
+    else
+    {
+        cout << "\nThe provided integers do not contain a composite number\n";
+    }
 }
 
 int main()
@@ -101,12 +116,12 @@ int main()
     int repeatExec = 0;
     do
     {
-        smallestCompositeNumber();
+        // The function to find the smallest composite number is called
+        findSmallestCompositeNumber();
 
-        cout << "\nEnter 1 to continue or 0 to quit:\n"
-             << endl;
-        cin >> repeatExec;
-        // repeatExec = getIntInput();
+        cout << "\nEnter 1 to continue or 0 to quit:\n\n";
 
-    } while (repeatExec == 1);
+        repeatExec = getIntInput();
+
+    } while (repeatExec != 0);
 }
